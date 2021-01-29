@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RaceController;
+use App\Http\Controllers\RunnerController;
+use App\Http\Resources\Race;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('v0')->group(function () {
+    Route::resource('races', RaceController::class);
+    Route::resource('runners', RunnerController::class);
+});
+
