@@ -20,6 +20,7 @@ class RunnerResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'cpf' => Str::padLeft($this->cpf, 11, 0),
             'birthday' => $birth->format('d/m/Y'),
             'age' => $age,
