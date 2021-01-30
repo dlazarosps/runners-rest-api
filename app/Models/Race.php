@@ -12,4 +12,10 @@ class Race extends Model
     const RACE_TYPES = ['3km', '5km', '10km', '21km', '42km'];
 
     protected $fillable = ['type', 'race_date'];
+
+    protected $casts = [
+        'race_date' => 'date:d/m/Y',
+    ];
+
+    protected $hidden = ['created_at', 'updated_at'];
 }

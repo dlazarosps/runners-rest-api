@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Runner;
 // use Illuminate\Http\Request;
 use App\Http\Requests\RunnerRequest as Request;
-
+use App\Http\Resources\RunnerResource;
 class RunnerController extends Controller
 {
     /**
@@ -15,7 +15,7 @@ class RunnerController extends Controller
      */
     public function index()
     {
-        return Runner::all();
+        return RunnerResource::collection(Runner::all());
     }
 
     /**
@@ -37,7 +37,7 @@ class RunnerController extends Controller
      */
     public function show(Runner $runner)
     {
-        return $runner;
+        return new RunnerResource($runner);
     }
 
     /**
