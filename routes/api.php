@@ -23,7 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v0')->group(function () {
-    Route::resource('races', RaceController::class);
-    Route::resource('runners', RunnerController::class);
+    Route::resources([
+        'races' => RaceController::class,
+        'runners' => RunnerController::class
+    ]);
 });
 

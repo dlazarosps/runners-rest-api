@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Runner;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\RunnerRequest as Request;
 
 class RunnerController extends Controller
 {
@@ -18,16 +19,6 @@ class RunnerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +26,7 @@ class RunnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Runner::create($request->all());
     }
 
     /**
@@ -46,18 +37,7 @@ class RunnerController extends Controller
      */
     public function show(Runner $runner)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Runner  $runner
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Runner $runner)
-    {
-        //
+        return $runner;
     }
 
     /**
@@ -69,7 +49,8 @@ class RunnerController extends Controller
      */
     public function update(Request $request, Runner $runner)
     {
-        //
+        $runner->update($request->all());
+        return $runner;
     }
 
     /**
@@ -80,6 +61,7 @@ class RunnerController extends Controller
      */
     public function destroy(Runner $runner)
     {
-        //
+        $runner->delete();
+        return $runner;
     }
 }

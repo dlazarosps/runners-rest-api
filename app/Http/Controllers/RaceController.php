@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Race;
-use Illuminate\Http\Request;
+use App\Http\Requests\RaceRequest as Request;
 
 class RaceController extends Controller
 {
@@ -17,15 +17,6 @@ class RaceController extends Controller
         return Race::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +26,7 @@ class RaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Race::create($request->all());
     }
 
     /**
@@ -46,18 +37,7 @@ class RaceController extends Controller
      */
     public function show(Race $race)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Race  $race
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Race $race)
-    {
-        //
+        return $race;
     }
 
     /**
@@ -69,7 +49,8 @@ class RaceController extends Controller
      */
     public function update(Request $request, Race $race)
     {
-        //
+        $race->update($request->all());
+        return $race; 
     }
 
     /**
@@ -80,6 +61,7 @@ class RaceController extends Controller
      */
     public function destroy(Race $race)
     {
-        //
+        $race->delete();
+        return $race;
     }
 }
