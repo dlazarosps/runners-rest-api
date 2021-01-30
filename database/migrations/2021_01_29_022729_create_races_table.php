@@ -16,9 +16,13 @@ class CreateRacesTable extends Migration
     {
         Schema::create('races', function (Blueprint $table) {
             $table->id();
+
             $table->enum('type', Race::RACE_TYPES);
             $table->date('race_date');
+            
             $table->timestamps();
+
+            $table->unique(['type', 'race_date']);
         });
     }
 
