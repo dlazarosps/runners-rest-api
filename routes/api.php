@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RaceController;
 use App\Http\Controllers\RunnerController;
-use App\Http\Resources\Race;
+use App\Http\Controllers\ContestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v0')->group(function () {
     Route::resources([
         'races' => RaceController::class,
-        'runners' => RunnerController::class
+        'runners' => RunnerController::class,
+        'contests' => ContestController::class,
     ]);
 });
 
