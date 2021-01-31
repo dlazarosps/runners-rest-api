@@ -23,9 +23,11 @@ class ContestFactory extends Factory
      */
     public function definition()
     {
+        //TODO unique constraint random issue
         return [
             'race_id' => $this->faker->unique(true)->numberBetween(1, Race::count()),
             'runner_id' => $this->faker->unique(true)->numberBetween(1, Runner::count()),
+            'age' => $this->faker->numberBetween(18, 60),
 
             // 'started_at' => $this->faker->time('H:i:s.u'),
             // 'ended_at' => $this->faker->time('H:i:s.u'),

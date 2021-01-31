@@ -45,9 +45,26 @@ class ContestController extends Controller
      */
     public function perType($type)
     {   
-        /* Contest::with('Race')->whereHas('race', function($query) { $query->where('type', '=', '5km'); })->get(); */
         return Contest::orderBy('duration', 'asc')
             ->with($this->relationships())
+            ->whereHas('race', function($query) use ($type) { 
+                $query->where('type', '=', $type); 
+            })
+            ->get(); 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function perAge($type, $age)
+    {   
+        $range = explode('-', $age);
+
+        return Contest::orderBy('duration', 'asc')
+            ->with($this->relationships())
+            ->whereBetween('age', $range)
             ->whereHas('race', function($query) use ($type) { 
                 $query->where('type', '=', $type); 
             })
@@ -86,10 +103,14 @@ class ContestController extends Controller
             }
         }
 
+        $birth = Carbon::parse($runner->birthday);
+        $age = Carbon::parse($race->race_date)->diffInYears($birth);
+
         $contest = new Contest();
 
         $contest->race_id = $race_id;
         $contest->runner_id = $runner_id;
+        $contest->age = $age;
 
         $contest->save();
 
@@ -143,7 +164,7 @@ class ContestController extends Controller
         $start = Carbon::parse($started_at);
         $end = Carbon::parse($ended_at);
 
-        $duration = $start->diff($end)->format('%H:%I:%S');
+        $duration = $start->diff($end)->format('%H:%I:%S.%F');
 
         $contest->update([
             'started_at' => $started_at,

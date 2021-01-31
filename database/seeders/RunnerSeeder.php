@@ -13,6 +13,6 @@ class RunnerSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Runner::factory(25)->create();
+        \App\Models\Runner::factory(50)->create();
     }
 }

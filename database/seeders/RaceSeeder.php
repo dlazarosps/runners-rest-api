@@ -13,6 +13,6 @@ class RaceSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Race::factory(10)->create();
+        \App\Models\Race::factory(75)->create();
     }
 }

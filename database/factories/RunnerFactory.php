@@ -23,7 +23,7 @@ class RunnerFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'birthday' => $this->faker->date(),
+            'birthday' => $this->faker->dateTimeBetween('-60 years', '-18 years'),
             'cpf' => $this->faker->numerify('###########'),
         ];
     }

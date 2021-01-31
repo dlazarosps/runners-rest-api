@@ -58,28 +58,31 @@ Race Runners REST API
   - Fields
     - race_id
     - runner_id
-    - started_at (Y-m-d H:i:s)
-    - ended_at (Y-m-d H:i:s)
-    - duration (Y-m-d H:i:s)
+    - age
+    - started_at (H:i:s)
+    - ended_at (H:i:s)
+    - duration (H:i:s)
   - Rules
     - unique pair (race_id, runner_id)
       - unique runner per date
     - ended_at after started_at
   - URLs routes
-    - /api/v0/contests/                (GET - index)
-    - /api/v0/contests/{id}            (GET - show)
-    - /api/v0/contests/                (POST - store)
-    - /api/v0/contests/{id}            (PATCH/PUT - update)
-    - /api/v0/contests/insert          (POST - store)
-    - /api/v0/contests/finish          (POST - finish)
-    - /api/v0/contests/{race_id}/rank  (GET - rank)
-    - /api/v0/contests/{type}/results  (GET - results)
+    - /api/v0/contests/                       (GET - index)
+    - /api/v0/contests/{id}                   (GET - show)
+    - /api/v0/contests/                       (POST - store)
+    - /api/v0/contests/{id}                   (PATCH/PUT - update)
+    - /api/v0/contests/insert                 (POST - store)
+    - /api/v0/contests/finish                 (POST - finish)
+    - /api/v0/contests/{race_id}/rank         (GET - rank)
+    - /api/v0/contests/type/{type}/results         (GET - results)
+    - /api/v0/contests/type/{type}/age/{age_range}/results   (GET - results)
   - Example
 
 ``` json
 {
     "race_id": 3,
     "runner_id": 10,
+    "age": 18,
     "started_at": "2020-03-29 02:51:47.404",
     "ended_at": "2020-03-29 03:01:03.505",
     // "duration": "00:09:16.101",
@@ -114,7 +117,12 @@ docker-compose up -d
 
 ## Example
 
-- Offline = localhost:8000/api/v0/runners/
+- Offline
+  - localhost:8000/api/v0/runners/
+  - localhost:8000/api/v0/race/1
+  - localhost:8000/api/v0/contest/1/rank
+  - localhost:8000/api/v0/contest/type/5km/results
+  - localhost:8000/api/v0/contest/type/42km/age/18-25/results
 - Heroku Demo = .../api/v0/runners/
 
 <!-- 
