@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\ContestInsertRequest;
 use App\Http\Requests\ContestUpdateRequest;
 
@@ -13,14 +12,13 @@ use App\Models\Runner;
 use Carbon\Carbon;
 class ContestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    use \App\Http\Controllers\APIControllerTrait;
+
+    protected $model;
+
+    public function __construct(Contest $model)
     {
-        return Contest::paginate(20);
+        $this->model = $model;
     }
 
     /**
@@ -52,15 +50,6 @@ class ContestController extends Controller
         $race = Race::find($race_id);
         $runner = Runner::find($runner_id);
 
-        if (!$race || !$runner) {
-            return response()->json([
-                "message" => "The given data was invalid.", 
-                "errors" => [
-                    404 => "Race OR Runner not found",
-                ] 
-            ], 404);
-        }
-
         $others_race_date = Race::where('race_date', $race->race_date)->pluck('id');
 
         if ($others_race_date) {
@@ -85,18 +74,6 @@ class ContestController extends Controller
 
         $contest->save();
 
-        return $contest;
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contest  $contest
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contest $contest)
-    {
         return $contest;
     }
 
@@ -156,17 +133,5 @@ class ContestController extends Controller
         ]);
 
         return Contest::find($contest_id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contest  $contest
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Contest $contest)
-    {
-        $contest->delete();
-        return $contest;
     }
 }

@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Race;
-use App\Http\Requests\RaceRequest as Request;
+use App\Http\Requests\RaceRequest;
 
 class RaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return Race::paginate(10);
-    }
+    use \App\Http\Controllers\APIControllerTrait;
 
+    protected $model;
+
+    public function __construct(Race $model)
+    {
+        $this->model = $model;
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -24,20 +22,9 @@ class RaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RaceRequest $request)
     {
         return Race::create($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Race  $race
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Race $race)
-    {
-        return $race;
     }
 
     /**
@@ -47,21 +34,10 @@ class RaceController extends Controller
      * @param  \App\Models\Race  $race
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Race $race)
+    public function update(RaceRequest $request, Race $race)
     {
         $race->update($request->all());
         return $race; 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Race  $race
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Race $race)
-    {
-        $race->delete();
-        return $race;
-    }
 }
