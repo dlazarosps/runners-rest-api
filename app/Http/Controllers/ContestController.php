@@ -16,6 +16,8 @@ class ContestController extends Controller
 
     protected $model;
 
+    protected $relationships = ['Race', 'Runner'];
+
     public function __construct(Contest $model)
     {
         $this->model = $model;
@@ -29,6 +31,7 @@ class ContestController extends Controller
     public function rank(Race $race)
     {   
         return Contest::orderBy('duration', 'asc')
+            ->with($this->relationships())
             ->where([
                 ['race_id', '=', $race->id],
             ])

@@ -11,6 +11,8 @@ class RaceController extends Controller
 
     protected $model;
 
+    protected $relationships = ['Contest'];
+
     public function __construct(Race $model)
     {
         $this->model = $model;
