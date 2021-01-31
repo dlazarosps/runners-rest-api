@@ -17,14 +17,17 @@ class CreateContestsTable extends Migration
     {
         Schema::create('contests', function (Blueprint $table) {
             $table->id();
-            
+
+            $start = Carbon::now();
+            $end = Carbon::now()->add(47, 'minutes');
+
             $table->foreignId('race_id')->constrained('races');
             $table->foreignId('runner_id')->constrained('runners');
             
-            $table->timestamp('started_at')->default(Carbon::now()->format('Y-m-d H:i:s'));
-            $table->timestamp('ended_at')->default(Carbon::now()->format('Y-m-d H:i:s'));
+            $table->time('started_at', 3)->default($start->format('H:i:s'));
+            $table->time('ended_at', 3)->default($end->format('H:i:s'));
 
-            $table->time('duration', 3)->nullable();
+            $table->time('duration', 3)->default($start->diff($end)->format('%H:%I:%S'));
             
             $table->timestamps();
 
