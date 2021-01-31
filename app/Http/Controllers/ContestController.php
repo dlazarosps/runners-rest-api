@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ContestRequest;
 use App\Http\Requests\ContestInsertRequest;
+use App\Http\Requests\ContestUpdateRequest;
 
 use App\Models\Contest;
 use App\Models\Race;
 use App\Models\Runner;
 
+use Carbon\Carbon;
 class ContestController extends Controller
 {
     /**
@@ -52,7 +53,12 @@ class ContestController extends Controller
         $runner = Runner::find($runner_id);
 
         if (!$race || !$runner) {
-            return response()->json('Race OR Runner not found', 404);
+            return response()->json([
+                "message" => "The given data was invalid.", 
+                "errors" => [
+                    404 => "Race OR Runner not found",
+                ] 
+            ], 404);
         }
 
         $others_race_date = Race::where('race_date', $race->race_date)->pluck('id');
@@ -63,7 +69,12 @@ class ContestController extends Controller
                 ->count();
 
             if ($others_runner_race_date) {
-                return response()->json('Runner already registered in Contest at this date', 406);
+                return response()->json([
+                    "message" => "The given data was invalid.", 
+                    "errors" => [
+                        406 => "Runner already registered in Contest at this date",
+                    ] 
+                ], 406);
             }
         }
 
@@ -74,7 +85,7 @@ class ContestController extends Controller
 
         $contest->save();
 
-        return $contest->toJson();
+        return $contest;
     }
 
 
@@ -96,10 +107,55 @@ class ContestController extends Controller
      * @param  \App\Models\Contest  $contest
      * @return \Illuminate\Http\Response
      */
-    public function update(ContestRequest $request, Contest $contest)
+    public function update(ContestUpdateRequest $request, Contest $contest)
     {
         $contest->update($request->all());
         return $contest;
+    }
+
+    /**
+     * Update (results) the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Contest  $contest
+     * @return \Illuminate\Http\Response
+     */
+    public function finish(ContestUpdateRequest $request)
+    {
+        $race_id = $request->all()['race_id'];
+        $runner_id = $request->all()['runner_id'];
+
+        $contest = Contest::where([
+            ['race_id', '=', $race_id],
+            ['runner_id', '=', $runner_id],
+        ]);
+
+        if (!$contest->count()) {
+            return response()->json([
+                "message" => "The given data was invalid.", 
+                "errors" => [
+                    404 => "Contest not found",
+                ] 
+            ], 404);
+        }
+
+        $contest_id = $contest->get('id');
+
+        $started_at = $request->all()['started_at'];
+        $ended_at = $request->all()['ended_at'];
+
+        $start = Carbon::parse($started_at);
+        $end = Carbon::parse($ended_at);
+
+        $duration = $start->diff($end)->format('%H:%I:%S');
+
+        $contest->update([
+            'started_at' => $started_at,
+            'ended_at' => $ended_at,
+            'duration' => $duration,
+        ]);
+
+        return Contest::find($contest_id);
     }
 
     /**
