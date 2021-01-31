@@ -24,8 +24,8 @@ class ContestUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'race_id' => 'required',
-            'runner_id' => 'required',
+            'race_id' => 'required|exists:races,id',
+            'runner_id' => 'required|exists:runners,id',
             'started_at' => 'required|date_format:H:i:s.v',
             'ended_at' => 'required|date_format:H:i:s.v|after:started_at',
         ];
