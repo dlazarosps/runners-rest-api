@@ -39,6 +39,22 @@ class ContestController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function perType($type)
+    {   
+        /* Contest::with('Race')->whereHas('race', function($query) { $query->where('type', '=', '5km'); })->get(); */
+        return Contest::orderBy('duration', 'asc')
+            ->with($this->relationships())
+            ->whereHas('race', function($query) use ($type) { 
+                $query->where('type', '=', $type); 
+            })
+            ->get(); 
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

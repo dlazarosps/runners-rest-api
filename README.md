@@ -70,9 +70,10 @@ Race Runners REST API
     - /api/v0/contests/{id}            (GET - show)
     - /api/v0/contests/                (POST - store)
     - /api/v0/contests/{id}            (PATCH/PUT - update)
-    - /api/v0/contests/{race_id}/rank  (GET - rank)
     - /api/v0/contests/insert          (POST - store)
     - /api/v0/contests/finish          (POST - finish)
+    - /api/v0/contests/{race_id}/rank  (GET - rank)
+    - /api/v0/contests/{type}/results  (GET - results)
   - Example
 
 ``` json

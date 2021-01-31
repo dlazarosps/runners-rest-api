@@ -29,8 +29,10 @@ Route::prefix('v0')->group(function () {
         'contests' => ContestController::class,
     ]);
     
-    Route::get('contests/{race}/rank', [ContestController::class, 'rank'])->name('contests.rank');
-    Route::post('contests/insert', [ContestController::class, 'store'])->name('contests.insert');
     Route::post('contests/finish', [ContestController::class, 'finish'])->name('contests.finish');
+    Route::post('contests/insert', [ContestController::class, 'store'])->name('contests.insert');
+    
+    Route::get('contests/{race}/rank', [ContestController::class, 'rank'])->name('contests.rank');
+    Route::get('contests/{type}/results', [ContestController::class, 'perType'])->name('contests.per_type');
 });
 
