@@ -15,7 +15,7 @@ class RunnerController extends Controller
      */
     public function index()
     {
-        return RunnerResource::collection(Runner::all());
+        return RunnerResource::collection(Runner::paginate(5));
     }
 
     /**

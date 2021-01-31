@@ -14,7 +14,7 @@ class RaceController extends Controller
      */
     public function index()
     {
-        return Race::all();
+        return Race::paginate(10);
     }
 
 

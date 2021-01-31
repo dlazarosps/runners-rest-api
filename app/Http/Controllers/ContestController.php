@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contest;
 use App\Http\Requests\ContestRequest as Request;
+
+use App\Models\Contest;
+use App\Models\Race;
 
 class ContestController extends Controller
 {
@@ -14,7 +16,18 @@ class ContestController extends Controller
      */
     public function index()
     {
-        return Contest::all();
+        return Contest::paginate(20);
+    }
+
+    public function rank(Race $race)
+    {
+        // return Contest::paginate(20);
+        
+        return Contest::orderBy('duration', 'asc')
+            ->where([
+                ['race_id', '=', $race->id],
+            ])
+            ->paginate(3); 
     }
 
     /**
@@ -25,7 +38,7 @@ class ContestController extends Controller
      */
     public function store(Request $request)
     {
-        return Contest::create($request->all());
+        return Contest::create($request->paginate(20));
     }
 
     /**

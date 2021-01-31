@@ -28,5 +28,7 @@ Route::prefix('v0')->group(function () {
         'runners' => RunnerController::class,
         'contests' => ContestController::class,
     ]);
+    
+    Route::get('contests/{race}/rank', [ContestController::class, 'rank'])->name('contests.rank');
 });
 
