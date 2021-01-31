@@ -9,7 +9,7 @@ class Contest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['race_id', 'runner_id', 'started_at', 'ended_at'];
+    protected $fillable = ['race_id', 'runner_id', 'started_at', 'ended_at', 'duration'];
 
     protected $hidden = ['created_at', 'updated_at'];
 }

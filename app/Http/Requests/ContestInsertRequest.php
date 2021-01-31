@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContestRequest extends FormRequest
+class ContestInsertRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,6 @@ class ContestRequest extends FormRequest
         return [
             'race_id' => 'required',
             'runner_id' => 'required',
-            'stated_at' => 'required|date_format:Y-m-d H:i:s',
-            'ended_at' => 'required|date_format:Y-m-d H:i:s|after:started_at',
         ];
     }
 }

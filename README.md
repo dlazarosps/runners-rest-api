@@ -46,18 +46,21 @@ GET, POST, PUT, PATCH, DELETE
   - Fields
     - race_id
     - runner_id
-    - duration (H:i:s.v)
+    - started_at (Y-m-d H:i:s)
+    - ended_at (Y-m-d H:i:s)
+    - duration (Y-m-d H:i:s)
   - Rules
     - unique pair (race_id, runner_id)
-      - unique runner race per date
+      - unique runner per date
+    - ended_at after started_at
   - Example
 
 ``` json
 {
     "race_id": 3,
     "runner_id": 10,
-    "started_at": "02:51:47.404",
-    "ended_at": "03:01:03.505",
+    "started_at": "2020-03-29 02:51:47.404",
+    "ended_at": "2020-03-29 03:01:03.505",
     // "duration": "00:09:16.101",
 }
 ```

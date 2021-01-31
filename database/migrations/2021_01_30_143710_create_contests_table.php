@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use Carbon\Carbon;
+
 class CreateContestsTable extends Migration
 {
     /**
@@ -19,8 +21,10 @@ class CreateContestsTable extends Migration
             $table->foreignId('race_id')->constrained('races');
             $table->foreignId('runner_id')->constrained('runners');
             
-            $table->time('started_at', 3);
-            $table->time('ended_at', 3);
+            $table->timestamp('started_at')->default(Carbon::now()->format('Y-m-d H:i:s'));
+            $table->timestamp('ended_at')->default(Carbon::now()->format('Y-m-d H:i:s'));
+
+            $table->time('duration', 3)->nullable();
             
             $table->timestamps();
 

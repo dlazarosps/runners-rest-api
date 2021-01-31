@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
+use Carbon\Carbon;
 class RunnerResource extends JsonResource
 {
     /**
@@ -15,8 +16,8 @@ class RunnerResource extends JsonResource
      */
     public function toArray($request)
     {
-        $birth = \Carbon\Carbon::parse($this->birthday);
-        $age = \Carbon\Carbon::now()->diffInYears($birth);
+        $birth = Carbon::parse($this->birthday);
+        $age = Carbon::now()->diffInYears($birth);
 
         return [
             'id' => $this->id,
