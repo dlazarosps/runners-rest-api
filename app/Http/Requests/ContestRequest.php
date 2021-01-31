@@ -26,7 +26,8 @@ class ContestRequest extends FormRequest
         return [
             'race_id' => 'required',
             'runner_id' => 'required',
-            'duration' => 'required|date_format:H:i:s.v',
+            'started_at' => 'required|date_format:H:i:s.v',
+            'ended_at' => 'required|date_format:H:i:s.v|after:started_at',
         ];
     }
 }

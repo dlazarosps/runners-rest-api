@@ -56,7 +56,9 @@ GET, POST, PUT, PATCH, DELETE
 {
     "race_id": 3,
     "runner_id": 10,
-    "duration": "02:51:47.404"
+    "started_at": "02:51:47.404",
+    "ended_at": "03:01:03.505",
+    // "duration": "00:09:16.101",
 }
 ```
 
@@ -95,7 +97,9 @@ docker-compose up -d
 - Example = localhost:8000/api/v0/races/
 - Heroku Demo = .../api/v0/
 
+<!-- 
 ## Swagger documentation
 
 - ONLINE /api/v0/documentation
-- OFFLINE localhost:8000/api/v0/documentation
+- OFFLINE localhost:8000/api/v0/documentation 
+- -->

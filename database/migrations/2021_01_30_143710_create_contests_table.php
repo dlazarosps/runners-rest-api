@@ -19,7 +19,8 @@ class CreateContestsTable extends Migration
             $table->foreignId('race_id')->constrained('races');
             $table->foreignId('runner_id')->constrained('runners');
             
-            $table->time('duration', 3);
+            $table->time('started_at', 3);
+            $table->time('ended_at', 3);
             
             $table->timestamps();
 

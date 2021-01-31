@@ -20,9 +20,7 @@ class ContestController extends Controller
     }
 
     public function rank(Race $race)
-    {
-        // return Contest::paginate(20);
-        
+    {   
         return Contest::orderBy('duration', 'asc')
             ->where([
                 ['race_id', '=', $race->id],
@@ -38,7 +36,7 @@ class ContestController extends Controller
      */
     public function store(Request $request)
     {
-        return Contest::create($request->paginate(20));
+        return Contest::create($request->all());
     }
 
     /**
