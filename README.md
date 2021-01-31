@@ -7,7 +7,9 @@ Race Runners REST API
 
 ## Endpoints services
 
-GET, POST, PUT, PATCH, DELETE
+``` bash
+[SERVER_NAME]:[PORT] /api/ [VERSION] / [SERVICE]
+```
 
 - Race (Prova)
   - Fields
@@ -15,6 +17,11 @@ GET, POST, PUT, PATCH, DELETE
     - race_date (YYYY-MM-DD)
   - Rules
     - unique pair (type, date)
+  - URLs routes
+    - /api/v0/races/        (GET - index)
+    - /api/v0/races/{id}    (GET - show)
+    - /api/v0/races/        (POST - store)
+    - /api/v0/races/{id}    (PATCH/PUT - update)
   - Example
 
 ``` json
@@ -32,6 +39,11 @@ GET, POST, PUT, PATCH, DELETE
   - Rules
     - unique cpf
     - age +18
+  - URLs routes
+    - /api/v0/runners/      (GET - index)
+    - /api/v0/runners/{id}  (GET - show)
+    - /api/v0/runners/      (POST - store)
+    - /api/v0/runners/{id}  (PATCH/PUT - update)
   - Example
 
 ``` json
@@ -53,6 +65,14 @@ GET, POST, PUT, PATCH, DELETE
     - unique pair (race_id, runner_id)
       - unique runner per date
     - ended_at after started_at
+  - URLs routes
+    - /api/v0/contests/                (GET - index)
+    - /api/v0/contests/{id}            (GET - show)
+    - /api/v0/contests/                (POST - store)
+    - /api/v0/contests/{id}            (PATCH/PUT - update)
+    - /api/v0/contests/{race_id}/rank  (GET - rank)
+    - /api/v0/contests/insert          (POST - store)
+    - /api/v0/contests/finish          (POST - finish)
   - Example
 
 ``` json
@@ -91,14 +111,10 @@ docker-compose build
 docker-compose up -d
 ```
 
-## Access
+## Example
 
-``` bash
-[SERVER_NAME]:[PORT] /api/ [VERSION] / [SERVICE]
-```
-
-- Example = localhost:8000/api/v0/races/
-- Heroku Demo = .../api/v0/
+- Offline = localhost:8000/api/v0/runners/
+- Heroku Demo = .../api/v0/runners/
 
 <!-- 
 ## Swagger documentation
