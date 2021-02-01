@@ -26,10 +26,10 @@ class CreateContestsTable extends Migration
 
             $table->integer('age')->default(18);
             
-            $table->time('started_at', 3)->default($start->format('H:i:s'));
-            $table->time('ended_at', 3)->default($end->format('H:i:s'));
+            $table->time('started_at')->default($start->format('H:i:s'));
+            $table->time('ended_at')->default($end->format('H:i:s'));
 
-            $table->time('duration', 3)->default($start->diff($end)->format('%H:%I:%S'));
+            $table->time('duration')->default($start->diff($end)->format('%H:%I:%S'));
             
             $table->timestamps();
 
