@@ -67,15 +67,18 @@ Race Runners REST API
       - unique runner per date
     - ended_at after started_at
   - URLs routes
-    - /api/v0/contests/                       (GET - index)
-    - /api/v0/contests/{id}                   (GET - show)
-    - /api/v0/contests/                       (POST - store)
-    - /api/v0/contests/{id}                   (PATCH/PUT - update)
-    - /api/v0/contests/insert                 (POST - store)
-    - /api/v0/contests/finish                 (POST - finish)
-    - /api/v0/contests/{race_id}/rank         (GET - rank)
-    - /api/v0/contests/type/{type}/results         (GET - results)
-    - /api/v0/contests/type/{type}/age/{age_range}/results   (GET - results)
+    - /api/v0/contests/                                     (GET - index)
+    - /api/v0/contests/{id}                                 (GET - show)
+    - /api/v0/contests/                                     (POST - store)
+    - /api/v0/contests/{id}                                 (PATCH/PUT - update)
+    - /api/v0/contests/insert                               (POST - store)
+    - /api/v0/contests/finish                               (POST - finish)
+    - /api/v0/contests/{race_id}/rank                       (GET - rank)
+    - /api/v0/contests/type/{type}/results                  (GET - results)
+    - /api/v0/contests/type/{type}/age/{age_range}/results  (GET - results)
+      - range_age = ['18-25', '25-35', '35-45', '45-55', '55-100']
+    - /api/v0/contests/age/records                          (GET - records)
+    - /api/v0/contests/type/records                         (GET - records)
   - Example
 
 ``` json
@@ -83,8 +86,8 @@ Race Runners REST API
     "race_id": 3,
     "runner_id": 10,
     "age": 18,
-    "started_at": "2020-03-29 02:51:47.404",
-    "ended_at": "2020-03-29 03:01:03.505",
+    "started_at": "02:51:47.404",
+    "ended_at": "03:01:03.505",
     // "duration": "00:09:16.101",
 }
 ```
@@ -113,6 +116,10 @@ sudo apt install docker-compose
 cp .env.example .env
 docker-compose build
 docker-compose up -d
+
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan config:cache
+docker-compose exec app php artisan migrate
 ```
 
 ## Example
@@ -123,7 +130,9 @@ docker-compose up -d
   - localhost:8000/api/v0/contest/1/rank
   - localhost:8000/api/v0/contest/type/5km/results
   - localhost:8000/api/v0/contest/type/42km/age/18-25/results
-- Heroku Demo = .../api/v0/runners/
+  - localhost:8000/api/v0/contest/age/records
+  - localhost:8000/api/v0/contest/type/records
+<!-- - Heroku Demo = .../api/v0/runners/ -->
 
 <!-- 
 ## Swagger documentation

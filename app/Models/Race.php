@@ -11,6 +11,7 @@ class Race extends Model
     use HasFactory;
 
     const RACE_TYPES = ['3km', '5km', '10km', '21km', '42km'];
+    const AGE_RANGE = ['18-25', '25-35', '35-45', '45-55', '55-100'];
 
     protected $fillable = ['type', 'race_date'];
 
