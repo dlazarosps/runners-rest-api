@@ -132,7 +132,7 @@ docker-compose exec app php artisan migrate
   - localhost:8000/api/v0/contest/type/42km/age/18-25/results
   - localhost:8000/api/v0/contest/age/records
   - localhost:8000/api/v0/contest/type/records
-<!-- - Heroku Demo = .../api/v0/runners/ -->
+<!-- - Heroku Demo = https://murmuring-atoll-66325.herokuapp.com/api/v0/runners/ -->
 
 <!-- 
 ## Swagger documentation
